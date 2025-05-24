@@ -1,6 +1,6 @@
 # RAGFlow + Ollama on WSL2
 
-### 1. Use Ollama to serve LLM
+## 1. Use Ollama to serve LLM
 1. **Download Ollama** from https://ollama.com/download/linux
    ```bash
    curl -fsSL https://ollama.com/install.sh | sh
@@ -23,7 +23,7 @@
    Environment="OLLAMA_HOST=0.0.0.0:11434"
    ```
 
-### 2. Install Docker
+## 2. Install Docker
 1.  **Update your package information:**
     ```bash
     sudo apt update
@@ -74,7 +74,7 @@
     ```
     This command downloads a test image and runs it in a container. When the container runs, it prints a confirmation message and exits.
 
-### 3. Clone Ragflow repo, compose and run Ragflow image
+## 3. Clone Ragflow repo, compose and run Ragflow image
 1. Set the maximum number of memory map areas a process can have. (This might be optional)
    ```
    C:\Users\user_name\.wslconfig
@@ -88,14 +88,23 @@
    ```
    Then start WSL again.
 
-2. Clone Ragflow repo
+2. **Clone Ragflow repo**
    ```bash
    git clone https://github.com/infiniflow/ragflow.git
    ```
 
-3. Start up the server using the pre-built Docker images:
+3. **Select Image with Embedding Models (none slim version)**
    ```bash
    cd ragflow/docker
+   nano .env
+   ```
+   ```
+   # RAGFLOW_IMAGE=infiniflow/ragflow:v0.18.0-slim
+   RAGFLOW_IMAGE=infiniflow/ragflow:v0.18.0
+   ```
+
+4. **Start up the server using the pre-built Docker images:**
+   ```bash
    # Use CPU for embedding and DeepDoc tasks:
    docker compose -f docker-compose.yml up -d
 
@@ -103,10 +112,10 @@
    # docker compose -f docker-compose-gpu.yml up -d
    ```
 
-### 4. Create AI assistant with private knowledge base!
+## 4. Create AI assistant with private knowledge base!
+    - Video demo comming soon!
 
-
-### 5. Properly shutdown
+## 5. Properly shutdown
    - If the containers are not properly shutdown, it may cause error next time 
    ```bash
    docker compose down
